@@ -54,7 +54,7 @@ public class Suelo : MonoBehaviour
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // Crea un rayo desde la posición del ratón en la pantalla
         print(ray.direction);
-        if (Physics.Raycast(ray, out info, 200, LayerMask.GetMask("Tile"))) // Lanza el rayo y verifica si impacta algo en la capa "Tile" dentro de una distancia de 100
+        if (Physics.Raycast(ray, out info, 500, LayerMask.GetMask("Tile"))) // Lanza el rayo y verifica si impacta algo en la capa "Tile" dentro de una distancia de 100
         {
             // Rayo impactó una casilla (Tile)
 
@@ -62,8 +62,8 @@ public class Suelo : MonoBehaviour
 
             if (currentHover == -Vector2Int.one) // Si estamos cubriendo un cuadro despues de no cubrir ninguno
             {
-                print("the hit position is :");
-                print(hitPosition);
+                //print("the hit position is :");
+                //print(hitPosition);
                 currentHover = hitPosition;
                 tiles[hitPosition.x, hitPosition.y].layer = LayerMask.NameToLayer("Hover");
             }
