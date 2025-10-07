@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Game
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 89
+  controlID: 93
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -192,8 +192,8 @@ MonoBehaviour:
     y: 0
     width: 391
     height: 673
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 226}
+  m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -274,8 +274,8 @@ MonoBehaviour:
     y: 0
     width: 355
     height: 933
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 76}
+  m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
@@ -340,15 +340,14 @@ MonoBehaviour:
   m_LastFolders:
   - Assets/Materiales
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\PC PRIDE ANACONDA\OneDrive\Desktop\TAREAS\Proyecto
-    2\The-syndicate-Sangue\The-syndicate-Sangue
+  m_LastProjectPath: C:\Users\AMERIKE\Desktop\No borrar plox zap1097\The-syndicate-Sangue\The-syndicate-Sangue
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: c0a80000
-    m_LastClickedID: 43200
-    m_ExpandedIDs: 0000000098a8000000ca9a3b
+    m_SelectedIDs: 8ca80000
+    m_LastClickedID: 43148
+    m_ExpandedIDs: 00000000b8a600008ca8000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -377,7 +376,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000
+    m_ExpandedIDs: 00000000b8a60000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -474,9 +473,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 90ceffff
-      m_LastClickedID: -12656
-      m_ExpandedIDs: 20fbffff88a60000
+      m_SelectedIDs: c0e3ffff
+      m_LastClickedID: -7232
+      m_ExpandedIDs: 56f8ffffe6faffff10a90000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1108,9 +1107,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 3.71805, y: 12.010828, z: 8.138847}
+    m_Target: {x: 3.7444117, y: 5.546543, z: 4.38117}
     speed: 2
-    m_Value: {x: 3.71805, y: 12.010828, z: 8.138847}
+    m_Value: {x: 3.7444117, y: 5.546543, z: 4.38117}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1156,13 +1155,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.04928699, y: -0.9164069, z: 0.11916139, w: 0.37894973}
+    m_Target: {x: 0.16997331, y: 0.7588808, z: -0.21889235, w: 0.5893397}
     speed: 2
-    m_Value: {x: 0.050215878, y: -0.91507125, z: 0.12038377, w: 0.38161603}
+    m_Value: {x: 0.16908695, y: 0.75919837, z: -0.21775094, w: 0.58958626}
   m_Size:
-    m_Target: 5.7671185
+    m_Target: 0.60445094
     speed: 2
-    m_Value: 5.7671185
+    m_Value: 0.57842195
   m_Ortho:
     m_Target: 0
     speed: 2
