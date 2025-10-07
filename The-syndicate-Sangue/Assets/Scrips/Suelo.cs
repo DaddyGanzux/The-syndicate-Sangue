@@ -25,6 +25,7 @@ public class Suelo : MonoBehaviour
 
     [SerializeField] private Material tileMaterial; // Material que se asignará a cada casilla generada. Debe usar URP
 
+
     [SerializeField] private float tileSize = 0.7f; // Tamaño de cada casilla (en unidades de Unity). El video usa 0.7
     [SerializeField] private float yOffset = 0.15f; // Desplazamiento en el eje Y para que las casillas floten ligeramente sobre el tablero de arte
 
