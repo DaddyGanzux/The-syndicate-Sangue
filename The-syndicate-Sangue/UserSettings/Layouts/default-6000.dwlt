@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Game
   m_RootView: {fileID: 4}
   m_MinSize: {x: 875, y: 382}
   m_MaxSize: {x: 10000, y: 10000}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 103
+  controlID: 107
   draggingID: 0
 --- !u!114 &4
 MonoBehaviour:
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 38
+  controlID: 105
   draggingID: 0
 --- !u!114 &8
 MonoBehaviour:
@@ -197,7 +197,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 39
+  controlID: 106
   draggingID: 0
 --- !u!114 &9
 MonoBehaviour:
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 40
+  controlID: 42
   draggingID: 0
 --- !u!114 &10
 MonoBehaviour:
@@ -244,8 +244,8 @@ MonoBehaviour:
     y: 0
     width: 368
     height: 530
-  m_MinSize: {x: 201, y: 226}
-  m_MaxSize: {x: 4001, y: 4026}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -379,7 +379,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scrips
+    - Assets/Prefaps
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -389,16 +389,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scrips
+  - Assets/Prefaps
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\ALUMNO\Desktop\The-syndicate-Sangue\The-syndicate-Sangue
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 92da0000
-    m_LastClickedID: 55954
-    m_ExpandedIDs: 000000008cda000000ca9a3bffffff7f
+    m_SelectedIDs: e6a90000
+    m_LastClickedID: 43494
+    m_ExpandedIDs: 0000000016a9000078a9000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -427,7 +427,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 
+    m_ExpandedIDs: 0000000016a90000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -524,9 +524,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 7adb0000
+      m_SelectedIDs: eaa90000
       m_LastClickedID: 0
-      m_ExpandedIDs: aa58ffffd25affff
+      m_ExpandedIDs: d6faffff0aa70000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -543,7 +543,7 @@ MonoBehaviour:
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_TrimLeadingAndTrailingWhitespace: 0
-        m_ClientGUIView: {fileID: 10}
+        m_ClientGUIView: {fileID: 0}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -1158,9 +1158,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 884.1791, y: 563.30554, z: 311.10736}
+    m_Target: {x: 6.8619967, y: 1.2520667, z: 4.7334366}
     speed: 2
-    m_Value: {x: 884.1791, y: 563.30554, z: 311.10736}
+    m_Value: {x: 6.8619967, y: 1.2520667, z: 4.7334366}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1206,13 +1206,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.021607867, y: 0.0008972234, z: -0.000024056313, w: 0.99980336}
+    m_Target: {x: -0.037142787, y: 0.96166855, z: -0.16608857, w: -0.21520816}
     speed: 2
-    m_Value: {x: 0.021607064, y: 0.00089719007, z: -0.000024055418, w: 0.9997662}
+    m_Value: {x: -0.037141193, y: 0.9616273, z: -0.16608144, w: -0.21519892}
   m_Size:
-    m_Target: 786.04785
+    m_Target: 2.5095665
     speed: 2
-    m_Value: 786.04785
+    m_Value: 2.5095665
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1490,7 +1490,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -2548
+  m_LastSelectedObjectID: 42762
 --- !u!114 &21
 MonoBehaviour:
   m_ObjectHideFlags: 52
