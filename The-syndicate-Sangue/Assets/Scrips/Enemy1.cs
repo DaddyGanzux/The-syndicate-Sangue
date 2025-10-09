@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Enemy1 : movimiento
+public class Enemy1 : Personaje
 {
     
 }

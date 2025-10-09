@@ -23,7 +23,7 @@ using UnityEngine;
         Enemy15 = 18*/
     }
 
-public class movimiento : MonoBehaviour
+public class Personaje : MonoBehaviour
 {
     public int team;
     public int currentX;

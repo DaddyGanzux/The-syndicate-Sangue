@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Character1 : movimiento
+public class Character1 : Personaje
 {
     
 }
