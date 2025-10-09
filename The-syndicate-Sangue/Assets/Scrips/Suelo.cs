@@ -1,10 +1,11 @@
 
 // ChessPiceType = CharacterMovement
-// ChessPieces = Personaje
-// ChessPiece = movimiento
+// ChessPieces = Personajes
+// ChessPiece = Personaje
 // whiteTeam = CharacterTeam
 // blackTeam = EnemyTeam
 
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,7 +16,8 @@ public class Suelo : MonoBehaviour
     //              CAMPOS LOGICOS
     // =================================================================================================================================================================================================================================
 
-    private movimiento[,] Personajes; // Arreglo 2D para almacenar las referencias a los scripts de movimiento de los personajes
+    private Personaje[,] Personajes; // Arreglo 2D para almacenar las referencias a los scripts de movimiento de los personajes
+    private Personaje currentlyDragging;
     private const int TILE_COUNT_X = 24; // Constantes privadas para el tamano del suelo en X
     private const int TILE_COUNT_Y = 9;  // Constantes privadas para el tamano del suelo en Y
     private GameObject[,] tiles;        // Arreglo 2D para almacenar todos los GameObjects de las casillas
@@ -31,7 +33,7 @@ public class Suelo : MonoBehaviour
     [Header("Art Stuff")]
 
     [SerializeField] private Material tileMaterial; // Material que se asignara a cada casilla generada
-    [SerializeField] private float tileSize = 1.5f;  // Tamano de cada casilla
+    [SerializeField] private float tileSize = 2f;  // Tamano de cada casilla
     [SerializeField] private float yOffset = 0.15f;  // Desplazamiento en el eje Y para que las casillas floten
 
     [SerializeField] private Vector3 boardCenter = Vector3.zero; // Centro del tablero (ajuste fino si el punto de pivote del modelo 3D no es 000)
@@ -89,6 +91,29 @@ public class Suelo : MonoBehaviour
                 tiles[hitPosition.x, hitPosition.y].layer = LayerMask.NameToLayer("Hover");
             }
 
+            if(Input.GetMouseButtonDown(0)) // Si precionamos el boton del mouse
+            {
+                if (Personajes[hitPosition.x, hitPosition.y] != null)
+                {
+                    if (true)
+                    {
+                        currentlyDragging = Personajes[hitPosition.x, hitPosition.y];
+                    }
+                }
+            }
+
+            if (currentlyDragging != null && Input.GetMouseButtonUp(0)) // Si soltamoso el boton del mouse 
+            {
+                Vector2 previousPosition = new Vector2Int(currentlyDragging.currentX, currentlyDragging.currentY);
+
+                bool validMove = MoveTo(currentlyDragging, hitPosition.x, hitPosition.y);
+                if (!validMove)
+                {
+                    currentlyDragging.transform.position = GetTileCenter(currentlyDragging.currentX, currentlyDragging.currentY);
+                    currentlyDragging = null;
+                }
+            }
+
         }
         else // Rayo NO impacto una casilla (raton salio del tablero)
         {
@@ -117,7 +142,7 @@ public class Suelo : MonoBehaviour
         bounds = new Vector3(halfBoardX, 0, halfBoardY) + boardCenter;
 
         // 3. Inicializar el arreglo
-        Personajes = new movimiento[tileCountX, tileCountY]; // Inicializa el arreglo de personajes
+        Personajes = new Personaje[tileCountX, tileCountY]; // Inicializa el arreglo de personajes
         tiles = new GameObject[tileCountX, tileCountY]; // Inicializa el arreglo de casillas
 
         // 4. Iterar y generar cada casilla
@@ -171,12 +196,14 @@ public class Suelo : MonoBehaviour
     {
         int ChatacterTeam = 0, EnemyTeam = 1;
 
-        Personajes[0, 4] = SpawnSingleCharacter(CharacterMovement.Character1, ChatacterTeam); // Se spawnea Character1 en la posicion [5, 0] del arreglo
+        Personajes[0, 4] = SpawnSingleCharacter(CharacterMovement.Character1, ChatacterTeam); // Se spawnea Character1 en la posicion [0, 4]
+
+        Personajes[23,4] = SpawnSingleCharacter(CharacterMovement.Enemy1, EnemyTeam); // Se Spawnea Enemy1 en la posicion [23, 4]
     }
 
-    private movimiento SpawnSingleCharacter(CharacterMovement type, int team)
+    private Personaje SpawnSingleCharacter(CharacterMovement type, int team)
     {
-        movimiento cp = Instantiate(prefabs[(int)type - 1], transform).GetComponent<movimiento>(); // Instancia el prefab y obtiene el componente movimiento
+        Personaje cp = Instantiate(prefabs[(int)type - 1], transform).GetComponent<Personaje>(); // Instancia el prefab y obtiene el componente movimiento
 
         // Asigna las propiedades
         cp.type = type;
@@ -215,6 +242,16 @@ public class Suelo : MonoBehaviour
     //              METODOS DE UTILIDAD
     // =================================================================================================================================================================================================================================
 
+    private bool MoveTo(Personaje cp, int x, int y)
+    {
+        Vector2Int previousPosition = new Vector2Int(cp.currentX, cp.currentY);
+
+        Personajes[x, y] = cp;
+        Personajes[previousPosition.x, previousPosition.y] = null;
+
+        PositionSingleCharacter(x, y);
+        return true;
+    }
     private Vector2Int LookupTileIndex(GameObject hitInfo) // Busca los indices (X, Y) en el arreglo 'tiles'
     {
         for (int x = 0; x < TILE_COUNT_X; x++)

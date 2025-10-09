@@ -623,7 +623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c27b4c9c606debb44929d2fe747ad979, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileMaterial: {fileID: 2100000, guid: 8a7517175ef1ee24e94944c81dda8304, type: 2}
+  tileMaterial: {fileID: 2100000, guid: 5e42ac5b98fd1e640ba5bed658eafd48, type: 2}
   tileSize: 0.7
   yOffset: 0.15
   boardCenter: {x: 0, y: 0, z: 0}
