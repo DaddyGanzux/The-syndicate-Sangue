@@ -31,12 +31,23 @@ public class Suelo : MonoBehaviour
     [SerializeField] private Vector3 boardCenter = Vector3.zero; // Centro del tablero (ajuste fino si el punto de pivote del modelo 3D no es 0,0,0)
 
     // =================================================================================================================================================================================================================================
+    //              PREFABS Y MATERIALES
+    // =================================================================================================================================================================================================================================
+
+    [Header("Prefabs & Material")]
+    [SerializeField] private GameObject[] prefabs;
+    [SerializeField] private Material[] teamMaterials;
+
+
+    // =================================================================================================================================================================================================================================
     //              MÉTODOS MONOBEHAVIOUR
     // =================================================================================================================================================================================================================================
 
     private void Awake()  // Llamado al inicio, antes del primer frame. Usado para inicializar la cuadrícula
     {
         GenerateAllTiles(tileSize, TILE_COUNT_X, TILE_COUNT_Y);
+
+        SpawnSingleCharacter(CharacterMovement.Character1, 0);
     }
 
     private void Update() // Llamado una vez por frame. Usado para la lógica constante de interacción
@@ -159,6 +170,26 @@ public class Suelo : MonoBehaviour
         tileObject.layer = LayerMask.NameToLayer("Tile");
 
         return tileObject;
+    }
+
+    // =================================================================================================================================================================================================================================
+    //              SPAWNEA JUGADORES Y ENEMIGOS
+    // =================================================================================================================================================================================================================================
+
+    private void SpawnAllCharacters()
+    {
+
+    }
+
+    private movimiento SpawnSingleCharacter(CharacterMovement type, int team)
+    {
+        movimiento cp = Instantiate(prefabs[(int)type - 1], transform).GetComponent<movimiento>();
+
+        cp.type = type;
+        cp.team = team;
+        cp.GetComponent<MeshRenderer>().material = teamMaterials();
+
+        return cp;
     }
 
     // =================================================================================================================================================================================================================================

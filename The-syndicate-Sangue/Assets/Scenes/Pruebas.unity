@@ -624,6 +624,11 @@ MonoBehaviour:
   tileSize: 0.7
   yOffset: 0.15
   boardCenter: {x: 0, y: 0, z: 0}
+  prefabs:
+  - {fileID: 0}
+  - {fileID: 7280699934324071448, guid: ba292d2752132df4aaddd459b300eaa9, type: 3}
+  - {fileID: 7006221723666817816, guid: e9641847ae340e445832a8ee2b972320, type: 3}
+  teamMaterials: []
 --- !u!4 &462240618
 Transform:
   m_ObjectHideFlags: 0
@@ -1126,6 +1131,10 @@ PrefabInstance:
     - target: {fileID: 6549298932238885005, guid: 6abae1497dc652747ae78186b3f9f8ff, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6549298932238885005, guid: 6abae1497dc652747ae78186b3f9f8ff, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

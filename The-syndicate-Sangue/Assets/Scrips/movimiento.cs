@@ -3,7 +3,8 @@ using UnityEngine;
     {
         None = 0,
         Character1 = 1,
-        Character2 = 2,
+        Enemy1 = 2
+        /*Character2 = 2,
         Character3 = 3,
         Enemy1 = 4,
         Enemy2 = 5,
@@ -19,7 +20,7 @@ using UnityEngine;
         Enemy12 = 15,
         Enemy13 = 16,
         Enemy14 = 17,
-        Enemy15 = 18
+        Enemy15 = 18*/
     }
 
 public class movimiento : MonoBehaviour
