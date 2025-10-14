@@ -1,19 +1,36 @@
-using Unity.VisualScripting;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class Dis : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class  Enemigo : MonoBehaviour
 {
+    [SerializeField] private int vida = 3;
 
-    public int daño = 10;
+    private Animator animator;
 
-    public void OnPointerDown(PointerEventData eventData)//Implementacion de la interfaz IPointerDownHandler
+    private void Start()
     {
-        Debug.Log("Botón presionado sobre " + gameObject.name);
+        animator = GetComponent<Animator>();
     }
 
-    public void OnPointerUp(PointerEventData eventData)//Implementacion de la interfaz IPointerUpHandler
+    public void RecibirDaño(int daño)
     {
-        Debug.Log("Botón soltado sobre " + gameObject.name);
+        vida -= daño;
+        if (vida <= 0)
+        {
+            Morir();
+        }
     }
+
+    private void Morir()
+    {
+        // Aquí puedes agregar efectos de muerte, animaciones, etc.
+        if (animator != null)
+        {
+            animator.SetTrigger("Morir");
+        }
+        // Desactivar el objeto después de un breve retraso para permitir que la animación se reproduzca
+        Destroy(gameObject, 1f); // Ajusta el tiempo según la duración de tu animación
+    }
+
 }
