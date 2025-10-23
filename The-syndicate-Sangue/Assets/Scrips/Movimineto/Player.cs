@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float x = 2;
     [SerializeField] private float z = 2;
     public float moveSpeed;
+    
 
     void Start()
     {
@@ -55,11 +56,14 @@ public class Player : MonoBehaviour
     public void Delimitation()
     {
         // Instancia el prefab en la posición deseada, con la rotación especificada
-        Instantiate(delimitacionVisual, new Vector3(x, 0.1f, z), Quaternion.Euler(0, 0, 0));//Bloque para ver el limite
-        Instantiate(delimitacionVisual, new Vector3(x, 0.1f, z), Quaternion.Euler(0, -90, 0));//Bloque para ver el limite derecha
-        Instantiate(delimitacionVisual, new Vector3(x, 0.1f, z), Quaternion.Euler(0, 90, 0));//Bloque para ver el limite izquierda
-        Instantiate(delimitacionVisual, new Vector3(x, 0.1f, z-10), Quaternion.Euler(0, 0, 0));//Bloque para ver el limite
+        Instantiate(delimitacionVisual, new Vector3(player.position.x + -5, 0.1f, z), Quaternion.Euler(0f, -90f, 0f));//Bloque para ver el limite derecha
+        Instantiate(delimitacionVisual, new Vector3(player.position.x + 5, 0.1f, z), Quaternion.Euler(0f, 90f, 0f));//Bloque para ver el limite izquierda
+        Instantiate(delimitacionVisual, new Vector3(x, 0.1f, player.position.z + 5f), Quaternion.Euler(0f, 0f, 0f));//Bloque para ver el limite
+        Instantiate(delimitacionVisual, new Vector3(x, 0.1f, player.position.z - 5f), Quaternion.Euler(0f, 0f, 0f));//Bloque para ver el limite
 
         Debug.Log("Delimitación creada en: " + x + ", " + z);
     }
+
+    
+
 }
