@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Delimitation();
-            Debug.Log("Delimitación creada al presionar espacio.");
+            //Debug.Log("Delimitación creada al presionar espacio.");
         }
 
     }
@@ -41,11 +41,11 @@ public class Player : MonoBehaviour
 
         if(Input.GetAxis("Horizontal") != 0)
         {
-            Debug.Log("Movimiento detectado: " + movement);
+            //Debug.Log("Movimiento detectado: " + movement);
         }
         if(Input.GetAxis("Vertical") != 0)
         {
-            Debug.Log("Movimiento detectado: " + movement);
+           //Debug.Log("Movimiento detectado: " + movement);
         }
 
 
@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
         Instantiate(delimitacionVisual, new Vector3(x, 0.1f, player.position.z + 5f), Quaternion.Euler(0f, 0f, 0f));//Bloque para ver el limite
         Instantiate(delimitacionVisual, new Vector3(x, 0.1f, player.position.z - 5f), Quaternion.Euler(0f, 0f, 0f));//Bloque para ver el limite
 
-        Debug.Log("Delimitación creada en: " + x + ", " + z);
+        //Debug.Log("Delimitación creada en: " + x + ", " + z);
     }
 
     

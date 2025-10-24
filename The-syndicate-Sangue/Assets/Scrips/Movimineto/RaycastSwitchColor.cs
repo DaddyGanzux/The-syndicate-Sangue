@@ -14,7 +14,7 @@ public class RaycastSwitchColor : MonoBehaviour
         if (Physics.Raycast(transform.position, Vector3.down, out hit, maxDistance))
         {
             // Muestra en consola el nombre del objeto tocado
-            Debug.Log("Toca suelo con: " + hit.collider.name);
+            //Debug.Log("Toca suelo con: " + hit.collider.name);
 
             // Unitiy busca el componente gridController en el objeto impactado
             gridController grid = hit.collider.GetComponent<gridController>();//Si lo hace se gusrada en grid y es diferente de null
@@ -23,6 +23,7 @@ public class RaycastSwitchColor : MonoBehaviour
             if (grid != null)
             {
                 grid.CambiarColorVisitado(); // Llama al método del grid para cambiar color
+                Debug.Log(hit.collider);
             }
         }
     }
