@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float x = 2;
     [SerializeField] private float z = 2;
     public float moveSpeed;
-    
+    public TurnosController turnosController;
 
     void Start()
     {
@@ -25,14 +25,20 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        Move();
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Delimitation();
-            //Debug.Log("Delimitación creada al presionar espacio.");
+        if(turnosController.turnoActual == true)
+        { 
+            Move();
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Delimitation();
+                //Debug.Log("Delimitación creada al presionar espacio.");
+            }
+
         }
 
     }
+
+
 
     public void Move()
     {

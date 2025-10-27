@@ -3,7 +3,8 @@ using UnityEngine;
 public class RaycastSwitchColor : MonoBehaviour
 {
     public float maxDistance = 5f; // Distancia máxima del raycast
-    private RaycastHit hit;        // guarda la información del objeto impactodo
+    private RaycastHit hit;        // Guarda la información del objeto impactado
+    private gridController lastGrid; // Última casilla que fue tocada por el raycast
 
     private void FixedUpdate()
     {
@@ -13,17 +14,30 @@ public class RaycastSwitchColor : MonoBehaviour
         // Lanza el raycast hacia abajo
         if (Physics.Raycast(transform.position, Vector3.down, out hit, maxDistance))
         {
-            // Muestra en consola el nombre del objeto tocado
-            //Debug.Log("Toca suelo con: " + hit.collider.name);
+            // Intenta obtener el componente gridController del objeto tocado
+            gridController currentGrid = hit.collider.GetComponent<gridController>();
 
-            // Unitiy busca el componente gridController en el objeto impactado
-            gridController grid = hit.collider.GetComponent<gridController>();//Si lo hace se gusrada en grid y es diferente de null
-
-            // Si lo encuentra, cambia su color
-            if (grid != null)
+            // Si golpea una nueva casilla diferente a la anterior
+            if (currentGrid != null && currentGrid != lastGrid)
             {
-                grid.CambiarColorVisitado(); // Llama al método del grid para cambiar color
-                Debug.Log(hit.collider);
+                // Si había una casilla anterior, la restauramos
+                if (lastGrid != null)
+                    lastGrid.Resart();
+
+                // Cambiamos el color de la nueva casilla
+                currentGrid.CambiarColorVisitado();
+
+                // Actualizamos la referencia
+                lastGrid = currentGrid;
+            }
+        }
+        else
+        {
+            // Si el raycast no toca nada y había una casilla previa, la restauramos
+            if (lastGrid != null)
+            {
+                lastGrid.Resart();
+                lastGrid = null;
             }
         }
     }

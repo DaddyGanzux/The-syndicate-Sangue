@@ -8,6 +8,8 @@ public class Enemy2AI : MonoBehaviour
     public Transform[] patrolPoints; // Puntos dentro de la zona marcada
     public float movementSpeed = 3.0f; // Velocidad de movimiento del enemigo
     private int currentPatrolIndex = 0;
+    public int numPasos = 5;
+    gridController grid;
 
     private NavMeshAgent navMeshAgent;
 
@@ -30,8 +32,10 @@ public class Enemy2AI : MonoBehaviour
     {
         // Si hay un objetivo asignado, sigue al objetivo
         if (target != null)
-        {
-            navMeshAgent.SetDestination(target.position);
+        { 
+
+                navMeshAgent.SetDestination(target.position);
+
         }
         else
         {
