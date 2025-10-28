@@ -8,8 +8,9 @@ public class Enemy2AI : MonoBehaviour
     public Transform[] patrolPoints; // Puntos dentro de la zona marcada
     public float movementSpeed = 3.0f; // Velocidad de movimiento del enemigo
     private int currentPatrolIndex = 0;
-    public int numPasos = 5;
+    public float numPasos = 3;
     gridController grid;
+    public TurnosController turnosController;
 
     private NavMeshAgent navMeshAgent;
 
@@ -17,42 +18,31 @@ public class Enemy2AI : MonoBehaviour
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.speed = movementSpeed;
-
-        if (patrolPoints.Length > 0)
-        {
-            SetDestinationToNextPatrolPoint();
-        }
-        else
-        {
-            Debug.LogWarning("No se han asignado puntos de patrulla.");
-        }
     }
 
     void Update()
     {
-        // Si hay un objetivo asignado, sigue al objetivo
-        if (target != null)
-        { 
-
-                navMeshAgent.SetDestination(target.position);
-
-        }
-        else
+        if (turnosController.turnoActual == 1)// Verifica si es el turno del enemigo
         {
-            // Si no hay un objetivo, vaga por los puntos asginados
-            if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.5f)
+            if (numPasos > 0)
             {
-                SetDestinationToNextPatrolPoint();
+                // Si hay un objetivo asignado, sigue al objetivo
+                if (target != null)
+                {
+                    numPasos -= Time.deltaTime;
+                    Debug.Log("Pasos restantes del enemigo: " + numPasos);
+
+
+                    navMeshAgent.SetDestination(target.position);
+                }
             }
+            else
+            {
+                navMeshAgent.SetDestination(gameObject.transform.position);
+            }
+
         }
+
     }
 
-    void SetDestinationToNextPatrolPoint()
-    {
-        if (patrolPoints.Length == 0)
-            return;
-
-        currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
-        navMeshAgent.SetDestination(patrolPoints[currentPatrolIndex].position);
-    }
 }

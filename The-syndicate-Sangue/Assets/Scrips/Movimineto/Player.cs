@@ -1,75 +1,86 @@
-using UnityEngine;
+锘縰sing UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public GameObject prefabDelimitation;
-    public GameObject delimitacionVisual;
-    public Transform player;
+    public GameObject delimitacionVisual; // Prefab del bloque delimitador
+    public Transform player;              // Transform del jugador
     public Rigidbody rb;
-    [SerializeField] private float x = 2;
-    [SerializeField] private float z = 2;
-    public float moveSpeed;
+    public float moveSpeed = 5f;
+
     public TurnosController turnosController;
+
+    // Referencias a las delimitaciones ya instanciadas
+    private GameObject limiteIzq;
+    private GameObject limiteDer;
+    private GameObject limiteSup;
+    private GameObject limiteInf;
+
+    private float x, z;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        x = player.position.x;
+        z = player.position.z;
 
-        // Guardamos posici髇 inicial del jugador multiplicada por 2 (seg鷑 tu l骻ica)
-        x = player.position.x * 1;
-        z = player.position.z * 1;
-
-        // Crear el objeto delimitador
-        Delimitation();
+        // Crear delimitaciones una sola vez
+        CrearDelimitaciones();
     }
 
     void Update()
     {
-        if(turnosController.turnoActual == true)
-        { 
+        // Solo permitir movimiento si es el turno del jugador
+        if (turnosController.turnoActual == 0)
+        {
+            rb.constraints = RigidbodyConstraints.None; // Descongelar el Rigidbody para permitir movimiento
             Move();
+
+            // Al presionar espacio: cambiar de turno y mover las delimitaciones
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                Delimitation();
-                //Debug.Log("Delimitaci髇 creada al presionar espacio.");
+                rb.linearVelocity = Vector3.zero; // Detener el movimiento al cambiar de turno
+                rb.constraints = RigidbodyConstraints.FreezeAll; // Congelar el Rigidbody
+                ActualizarDelimitaciones();
+                turnosController.CambiarTurno(); // Cambiar turno al enemigo
             }
-
         }
-
     }
-
-
 
     public void Move()
     {
-        // Vector de movimiento seg鷑 teclas WASD o flechas
+        // Movimiento con WASD o flechas
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-
-        if(Input.GetAxis("Horizontal") != 0)
-        {
-            //Debug.Log("Movimiento detectado: " + movement);
-        }
-        if(Input.GetAxis("Vertical") != 0)
-        {
-           //Debug.Log("Movimiento detectado: " + movement);
-        }
-
-
-        // Aplicar velocidad al rigidbody
         rb.linearVelocity = movement * moveSpeed;
     }
 
-    public void Delimitation()
+    // 馃敼 Crea los objetos de delimitaci贸n solo una vez
+    void CrearDelimitaciones()
     {
-        // Instancia el prefab en la posici髇 deseada, con la rotaci髇 especificada
-        Instantiate(delimitacionVisual, new Vector3(player.position.x + -5, 0.1f, z), Quaternion.Euler(0f, -90f, 0f));//Bloque para ver el limite derecha
-        Instantiate(delimitacionVisual, new Vector3(player.position.x + 5, 0.1f, z), Quaternion.Euler(0f, 90f, 0f));//Bloque para ver el limite izquierda
-        Instantiate(delimitacionVisual, new Vector3(x, 0.1f, player.position.z + 5f), Quaternion.Euler(0f, 0f, 0f));//Bloque para ver el limite
-        Instantiate(delimitacionVisual, new Vector3(x, 0.1f, player.position.z - 5f), Quaternion.Euler(0f, 0f, 0f));//Bloque para ver el limite
-
-        //Debug.Log("Delimitaci髇 creada en: " + x + ", " + z);
+        limiteIzq = Instantiate(delimitacionVisual, new Vector3(player.position.x - 5, 0.1f, z), Quaternion.Euler(0, -90, 0));
+        limiteDer = Instantiate(delimitacionVisual, new Vector3(player.position.x + 5, 0.1f, z), Quaternion.Euler(0, 90, 0));
+        limiteSup = Instantiate(delimitacionVisual, new Vector3(x, 0.1f, player.position.z + 5f), Quaternion.identity);
+        limiteInf = Instantiate(delimitacionVisual, new Vector3(x, 0.1f, player.position.z - 5f), Quaternion.identity);
     }
 
-    
+    // 馃敼 En lugar de crear nuevos, mueve los existentes
+    void ActualizarDelimitaciones()
+    {
+        if (limiteIzq == null || limiteDer == null || limiteSup == null || limiteInf == null)
+        {
+            // Si por alguna raz贸n se destruyeron, las volvemos a crear
+            CrearDelimitaciones();
+            return;
+        }
 
+        // Actualiza las posiciones seg煤n la nueva ubicaci贸n del jugador
+        x = player.position.x;
+        z = player.position.z;
+
+        limiteIzq.transform.position = new Vector3(x - 5, 0.1f, z);
+        limiteDer.transform.position = new Vector3(x + 5, 0.1f, z);
+        limiteSup.transform.position = new Vector3(x, 0.1f, z + 5f);
+        limiteInf.transform.position = new Vector3(x, 0.1f, z - 5f);
+
+        Debug.Log("Delimitaciones actualizadas a nueva posici贸n.");
+    }
 }
