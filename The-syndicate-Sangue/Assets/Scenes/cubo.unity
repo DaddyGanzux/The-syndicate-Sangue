@@ -2338,8 +2338,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 545, y: -499}
-  m_SizeDelta: {x: 290, y: 127.0797}
+  m_AnchoredPosition: {x: 546.55, y: -489.52}
+  m_SizeDelta: {x: 289.1, y: 100.04}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &183028872
 MonoBehaviour:
@@ -5087,6 +5087,8 @@ MonoBehaviour:
   ReducirChanceAtaqueExitoso: 0
   enemyAI: {fileID: 1298374921}
   probabilidadTiro: 1
+  turnos: {fileID: 334924687}
+  playerController: {fileID: 446709290}
 --- !u!1 &451300516
 GameObject:
   m_ObjectHideFlags: 0
@@ -14998,6 +15000,7 @@ MonoBehaviour:
   movementSpeed: 3
   numPasos: 3
   turnosController: {fileID: 334924687}
+  playerStats: {fileID: 0}
   health: 100
 --- !u!1 &1306735486
 GameObject:
@@ -20622,7 +20625,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 825.55164, y: -489.7504}
+  m_AnchoredPosition: {x: 825.55, y: -489.29}
   m_SizeDelta: {x: 268.8967, y: 100.4992}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1725617729

@@ -27,6 +27,7 @@ public class gridController : MonoBehaviour
         {
             rend.material = gridMaterialEnd; // Cambia el color
             fueVisitado = true; // Marca que fue visitada
+            Debug.Log("Casilla visitada. Contador de pasos del enemigo: " + contadorPasosEnemigo);
         }
     }
 

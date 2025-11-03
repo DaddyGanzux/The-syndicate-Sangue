@@ -83,4 +83,16 @@ public class Player : MonoBehaviour
 
         Debug.Log("Delimitaciones actualizadas a nueva posición.");
     }
+
+    public void FinalizarTurnoJugador()
+    {
+        rb.linearVelocity = Vector3.zero;//Esto hace que el jugador se detenga al finalizar su turno
+        rb.constraints = RigidbodyConstraints.FreezeAll;//Congela el Rigidbody para que no se mueva hasta su próximo turno
+
+        ActualizarDelimitaciones();//Actualiza las delimitaciones al finalizar el turno
+
+        turnosController.CambiarTurno();//Cambia el turno al enemigo
+    }
+
+
 }

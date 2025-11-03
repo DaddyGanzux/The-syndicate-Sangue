@@ -13,8 +13,10 @@ public class Enemy2AI : MonoBehaviour
     public float numPasos = 3;
     gridController grid;
     public TurnosController turnosController;
+    public AtaquePlayer playerStats;
 
     private NavMeshAgent navMeshAgent;
+    
 
     //Conf stats
     public float health = 100f;
@@ -23,10 +25,7 @@ public class Enemy2AI : MonoBehaviour
 
 
     void Start()
-    {
-
-
-
+    { 
 
         //movimiento IA
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -35,35 +34,57 @@ public class Enemy2AI : MonoBehaviour
 
     void Update()
     {
-        //Chance de ser atacado
+        DectectarCobertura();
+        DibujarRaycastCobertura();
 
 
-
-
-
-
-        //Movimiento de la IA
-        if (turnosController.turnoActual == 1)// Verifica si es el turno del enemigo
+        if (turnosController.turnoActual == 1)
         {
-            if (numPasos > 0)
+            // arranca solo si NO hay una coroutine ya en proceso
+            if (!estaEjecutandoTurno)
             {
-                // Si hay un objetivo asignado, sigue al objetivo
-                if (target != null)
-                {
-                    numPasos -= Time.deltaTime;
-                    //Debug.Log("Pasos restantes del enemigo: " + numPasos);
-
-
-                    navMeshAgent.SetDestination(target.position);
-                }
+                estaEjecutandoTurno = true;
+                StartCoroutine(TurnoEnemigo());
             }
-            else
-            {
-                navMeshAgent.SetDestination(gameObject.transform.position);
-            }
+        }
+        else
+        {
+            estaEjecutandoTurno = false;
+        }
+    }
 
+    bool estaEjecutandoTurno = false;
+
+    public IEnumerator TurnoEnemigo()
+    {
+        Debug.Log("Enemigo EMPIEZA su turno");
+
+        // reinicia pasos
+        ResetNumPasos();
+
+        // mover enemigo hasta gastar pasos
+        while (numPasos > 0)
+        {
+            if (target != null)
+                navMeshAgent.SetDestination(target.position);
+
+            numPasos -= Time.deltaTime;
+            yield return null;
         }
 
+        // deja de moverse
+        navMeshAgent.SetDestination(transform.position);
+        Debug.Log("Enemigo movimiento TERMINADO");
+
+        // espera un momento antes de atacar
+        yield return new WaitForSeconds(2);
+
+        // ataque al jugador
+        Debug.Log("Enemigo ATACA al jugador!");
+        playerStats.health -= 10f; //<--- aquí restas vida al player
+
+        // TERMINA el turno
+        turnosController.CambiarTurno();
     }
 
 
