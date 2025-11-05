@@ -8,6 +8,9 @@ public class Player : MonoBehaviour
     public float moveSpeed = 5f;
 
     public TurnosController turnosController;
+    public AtaquePlayer ataque;
+
+
 
     // Referencias a las delimitaciones ya instanciadas
     private GameObject limiteIzq;
@@ -38,10 +41,7 @@ public class Player : MonoBehaviour
             // Al presionar espacio: cambiar de turno y mover las delimitaciones
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                rb.linearVelocity = Vector3.zero; // Detener el movimiento al cambiar de turno
-                rb.constraints = RigidbodyConstraints.FreezeAll; // Congelar el Rigidbody
-                ActualizarDelimitaciones();
-                turnosController.CambiarTurno(); // Cambiar turno al enemigo
+                FinalizarTurnoJugador();
             }
         }
     }
@@ -88,6 +88,10 @@ public class Player : MonoBehaviour
     {
         rb.linearVelocity = Vector3.zero;//Esto hace que el jugador se detenga al finalizar su turno
         rb.constraints = RigidbodyConstraints.FreezeAll;//Congela el Rigidbody para que no se mueva hasta su próximo turno
+
+        ataque.chanceAtaqueExitoso = 100; // <--- resetear probabilidad aquí
+        ataque.ReducirChanceAtaqueExitoso = 0; // <--- resetear reducción aquí tambien
+
 
         ActualizarDelimitaciones();//Actualiza las delimitaciones al finalizar el turno
 
