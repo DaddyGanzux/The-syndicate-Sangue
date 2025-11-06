@@ -10,18 +10,9 @@ public class Database : ScriptableObject
         public string name; // Nombre del coleccionable
         public int ID; // Numero asignado
         public Sprite icon; // Icono del coleccionable que se mostrara em el menu
-        //public Type type;
-        //public bool acumulable;
-        //public int maxStack;
         public string description; // Descripcion del objeto
         //public BaseItem item;
     }
-
-    /*public enum Type
-    {
-        consumible,
-        equipable
-    }¨*/
 
     public InventoryItem[] dataBase;
 
