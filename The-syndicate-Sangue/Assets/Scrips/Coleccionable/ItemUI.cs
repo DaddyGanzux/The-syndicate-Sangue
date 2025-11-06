@@ -4,8 +4,7 @@ using TMPro;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 
-// IPointerClickHandler: Detecta los clicks del raton, IPointerEnterHandler: Detecta cuando el raton entra en el area del objeto, IPointerExitHandler: Detecta cuando el raton sale del area del objeto
-public class ItemUI : MonoBehaviour, IPointerClickHandler, TPointerEnterHadler, IPointerExitHandler 
+public class ItemUI : MonoBehaviour, IPointerClickHandler// IPointerClickHandler: Detecta los clicks del raton
 {
     [SerializeField] // Hace que aunque la referencia se a privada, se pueda asignar desde el inspector
     private Database db; // Referencia privada a la base de datos de los coleccionables
@@ -21,11 +20,6 @@ public class ItemUI : MonoBehaviour, IPointerClickHandler, TPointerEnterHadler, 
     {
         iconoImage = transform.GetComponent<Image>();
 
-        if (exParent.GetComponent<Image>())
-        {
-            exParent.GetComponent<Image>().fillCenter = true;
-        }
-
         InitializedItem(id);
     }
 
@@ -38,3 +32,19 @@ public class ItemUI : MonoBehaviour, IPointerClickHandler, TPointerEnterHadler, 
 
         iconoImage.sprite = itemData.icon;
     }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.clickCount == 2)
+        {
+            if (!Inventory.Instance.IsDescriptionShowing)
+            {
+                Inventory.Instance.ShowDescription(this);
+            }
+            else
+            {
+                Inventory.Instance.HideDescription();
+            }
+        }
+    }
+}
