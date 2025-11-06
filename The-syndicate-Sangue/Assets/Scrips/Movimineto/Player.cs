@@ -63,7 +63,7 @@ public class Player : MonoBehaviour
     }
 
     // 🔹 En lugar de crear nuevos, mueve los existentes
-    void ActualizarDelimitaciones()
+    public void ActualizarDelimitaciones()
     {
         if (limiteIzq == null || limiteDer == null || limiteSup == null || limiteInf == null)
         {
@@ -89,8 +89,7 @@ public class Player : MonoBehaviour
         rb.linearVelocity = Vector3.zero;//Esto hace que el jugador se detenga al finalizar su turno
         rb.constraints = RigidbodyConstraints.FreezeAll;//Congela el Rigidbody para que no se mueva hasta su próximo turno
 
-        ataque.chanceAtaqueExitoso = 100; // <--- resetear probabilidad aquí
-        ataque.ReducirChanceAtaqueExitoso = 0; // <--- resetear reducción aquí tambien
+        ataque.probabilidadBase = 100; // <--- resetear probabilidad aquí
 
 
         ActualizarDelimitaciones();//Actualiza las delimitaciones al finalizar el turno

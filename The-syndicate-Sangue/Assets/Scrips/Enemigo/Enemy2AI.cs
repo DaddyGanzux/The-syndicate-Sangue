@@ -16,6 +16,7 @@ public class Enemy2AI : MonoBehaviour
     //llamar referencias
     public TurnosController turnosController;
     public AtaquePlayer playerStats;
+    public AtaquePlayer ataquePlayer;
 
     //NavMeshAgent para movimiento IA
     private NavMeshAgent navMeshAgent;
@@ -23,8 +24,6 @@ public class Enemy2AI : MonoBehaviour
 
     //Conf stats
     public float health = 100f;
-
-
 
 
     void Start()
@@ -37,11 +36,10 @@ public class Enemy2AI : MonoBehaviour
 
     void Update()
     {
-        DibujarRaycastCobertura();
-        // SOLO AQUÍ verificar cobertura UNA vez
-        DectectarCobertura();
+
         if (turnosController.turnoActual == 1)
         {
+
             // arranca solo si NO hay una coroutine ya en proceso
             if (!estaEjecutandoTurno)//Verifica si la bandera es diferente de true
             {
@@ -74,18 +72,16 @@ public class Enemy2AI : MonoBehaviour
             yield return null;
         }
 
-        // deja de moverse
-        navMeshAgent.SetDestination(transform.position);
-        Debug.Log("Enemigo movimiento TERMINADO");
+        DetenerMovinientoEnemigo();
 
-
-        yield return new WaitForSeconds(1);
+        //Logica de ataque
+        yield return new WaitForSeconds(1);//yield retorna el control despues de esperar 1 segundo
 
         playerStats.health -= 10f;
         Debug.Log("Enemigo ataca al jugador, vida jugador: " + playerStats.health);
-
-        turnosController.CambiarTurno();
         playerStats.puedeAtacar = true;
+
+        FinalizarTurnoEnemigo();
     }
 
 
@@ -95,65 +91,41 @@ public class Enemy2AI : MonoBehaviour
         numPasos = 3;
     }
 
-    public void DectectarCobertura()
+
+    public void OnTriggerEnter(Collider other)
     {
-        Physics.Raycast(transform.position, Vector3.forward, out RaycastHit hitInfo1);
-        Physics.Raycast(transform.position, Vector3.back, out RaycastHit hitInfo2);
-        Physics.Raycast(transform.position, Vector3.right, out RaycastHit hitInfo3);
-        Physics.Raycast(transform.position, Vector3.left, out RaycastHit hitInfo4);
-        if (hitInfo1.collider != null && hitInfo1.collider.CompareTag("CoberturaAlta"))
+        if (other.CompareTag("CoberturaAlta"))
         {
-            playerStats.ReducirChanceAtaqueExitoso = .25f;
-            Debug.Log("CoberturaAlta detectada al frente");
+
+        ataquePlayer.coberturaPenalizacion = 0.50f;
+        Debug.Log("Cobertura Alta");
         }
-        else if(hitInfo1.collider != null && hitInfo1.collider.CompareTag("CoberturaBaja"))//hitinfo 1
+        else if (other.CompareTag("CoberturaBaja"))
         {
-            playerStats.ReducirChanceAtaqueExitoso = .10f;
-            Debug.Log("CoberturaBaja detectada al frente");
+            ataquePlayer.coberturaPenalizacion = 0.25f;
+            Debug.Log("Cobertura Baja");
         }
-        else if (hitInfo2.collider != null && hitInfo2.collider.CompareTag("CoberturaAlta"))
-        {
-            playerStats.ReducirChanceAtaqueExitoso = .25f;
-            Debug.Log("CoberturaAlta detectada atrás");
-        }
-        else if (hitInfo2.collider != null && hitInfo2.collider.CompareTag("CoberturaBaja"))//hitinfo2
-        {
-            playerStats.ReducirChanceAtaqueExitoso = .10f;
-            Debug.Log("CoberturaBaja detectada atrás");
-        }
-        else if (hitInfo3.collider != null && hitInfo3.collider.CompareTag("CoberturaAlta"))
-        {
-            playerStats.ReducirChanceAtaqueExitoso = .25f;
-            Debug.Log("CoberturaAlta detectada a la derecha");
-        }
-        else if (hitInfo3.collider != null && hitInfo3.collider.CompareTag("CoberturaBaja"))//hitinfo3
-        {
-            playerStats.ReducirChanceAtaqueExitoso = .10f;
-            Debug.Log("CoberturaBaja detectada a la derecha");
-        }
-        else if (hitInfo4.collider != null && hitInfo4.collider.CompareTag("CoberturaAlta"))
-        {
-            playerStats.ReducirChanceAtaqueExitoso = .25f;
-            Debug.Log("CoberturaAlta detectada a la izquierda");
-        }
-        else if (hitInfo4.collider != null && hitInfo4.collider.CompareTag("CoberturaBaja"))//hitinfo4
-        {
-            playerStats.ReducirChanceAtaqueExitoso = 0.10f;
-            Debug.Log("CoberturaBaja detectada a la izquierda");
-        }
-        else
-        {
-            playerStats.ReducirChanceAtaqueExitoso = 0;
-            Debug.Log("No hay cobertura detectada");
-        }
+                
     }
 
-    public void DibujarRaycastCobertura()
-    {
-        Debug.DrawRay(transform.position, Vector3.forward * 3, Color.red);// Dibuja el raycast en la escena para visualización
-        Debug.DrawRay(transform.position, Vector3.back * 3, Color.red);
-        Debug.DrawRay(transform.position, Vector3.right * 3, Color.red);
-        Debug.DrawRay(transform.position, Vector3.left * 3, Color.red);
+
+    public void OnTriggerExit(Collider other)
+    {   
+        if (other.CompareTag("CoberturaAlta") || other.CompareTag("CoberturaBaja"))
+            ataquePlayer.coberturaPenalizacion = 0;
+        Debug.Log("Fuera de Cobertura");
     }
 
+    void DetenerMovinientoEnemigo()
+    {
+        // deja de moverse
+        navMeshAgent.SetDestination(transform.position);
+        Debug.Log("Enemigo movimiento TERMINADO");
+
+    }
+
+    public void FinalizarTurnoEnemigo()
+    {
+        turnosController.CambiarTurno();
+    }
 }
