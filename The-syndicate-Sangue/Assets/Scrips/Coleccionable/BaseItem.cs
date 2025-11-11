@@ -4,20 +4,26 @@ using UnityEngine;
 public abstract class BaseItem : MonoBehaviour
 {
     public int id;
-
     public Database.InventoryItem itemData;
 
     private void Start()
     {
-        SetDataById(id);
+        if (Inventory.Instance != null && Inventory.Instance.bd != null)
+        {
+            SetDataById(id);
+        }
+        else
+        {
+            Debug.LogError("Inventory or Database (bd) not ready when BaseItem started! Check script execution order.");
+        }
     }
 
     public void SetDataById(int id)
     {
         itemData.ID = id;
-        itemData.description = Inventory.Instance.db.dataBase[id].description;
-        itemData.icon = Inventory.Instance.db.dataBase[id].icon;
-        itemData.name = Inventory.Instance.db.dataBase[id].name;
+        itemData.description = Inventory.Instance.bd.dataBase[id].description;
+        itemData.icon = Inventory.Instance.bd.dataBase[id].icon;
+        itemData.name = Inventory.Instance.bd.dataBase[id].name;
     }
 
     public abstract void Use();
@@ -26,8 +32,9 @@ public abstract class BaseItem : MonoBehaviour
     {
         if (other.transform.CompareTag("player"))
         {
-            Inventory.Instance.AddItem(id);
-            Destroy(this.gameObject);
+            Inventory.Instance.AddItem(id); // Llama al método del Inventario para asignar el ítem por su ID.
+
+            Destroy(this.gameObject); // 2. Destruye el objeto físico del mundo.
         }
     }
 

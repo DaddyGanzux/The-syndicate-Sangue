@@ -30,7 +30,7 @@ public class DescriptionUI : MonoBehaviour
 
     private void Update()
     {
-        Vector2 position = Input.mosusePosition;
+        Vector2 position = Input.mousePosition;
 
         float pivotX = position.x / Screen.width;
         float pivotY = position.y / Screen.height;

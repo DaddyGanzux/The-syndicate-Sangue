@@ -6,8 +6,8 @@ using System.Collections.Generic;
 
 public class ItemUI : MonoBehaviour, IPointerClickHandler// IPointerClickHandler: Detecta los clicks del raton
 {
-    [SerializeField] // Hace que aunque la referencia se a privada, se pueda asignar desde el inspector
-    private Database db; // Referencia privada a la base de datos de los coleccionables
+    [SerializeField] // Hace que aunque la referencia sea privada, se pueda asignar desde el inspector
+    private Database bd; // Referencia privada a la base de datos de los coleccionables
 
     public int id;
 
@@ -16,21 +16,19 @@ public class ItemUI : MonoBehaviour, IPointerClickHandler// IPointerClickHandler
 
     Image iconoImage; // Referencia a la imagen del icono del coleccionable
 
+    public void InitializedItem(int id, Database database)
+    {
+        itemData.ID = id;
+        // Usa la database pasada como argumento
+        itemData.description = database.dataBase[id].description;
+        itemData.icon = database.dataBase[id].icon;
+        itemData.name = database.dataBase[id].name;
+
+        iconoImage.sprite = itemData.icon;
+    }
     void Awake()
     {
         iconoImage = transform.GetComponent<Image>();
-
-        InitializedItem(id);
-    }
-
-    public void InitializedItem(int id)
-    {
-        itemData.ID = id;
-        itemData.description = db.dataBase[id].description;
-        itemData.icon = db.dataBase[id].icon;
-        itemData.name = db.dataBase[id].name;
-
-        iconoImage.sprite = itemData.icon;
     }
 
     public void OnPointerClick(PointerEventData eventData)
