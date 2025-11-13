@@ -26,8 +26,6 @@ public abstract class BaseItem : MonoBehaviour
         itemData.name = Inventory.Instance.bd.dataBase[id].name;
     }
 
-    public abstract void Use();
-
     public void OnTriggerEnter(Collider other)
     {
         if (other.transform.CompareTag("player"))

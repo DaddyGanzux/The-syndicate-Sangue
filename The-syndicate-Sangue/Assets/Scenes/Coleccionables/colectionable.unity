@@ -247,7 +247,7 @@ MonoBehaviour:
   slotsCount: 18
   isOpen: 0
   IsDescriptionShowing: 0
-  player: {fileID: 0}
+  player: {fileID: 6145428561478811555, guid: fc9b148a2950aaf4cba8422632222c5d, type: 3}
   inventoryToggle: {fileID: 1674293630}
   slotPrefab: {fileID: 5318747453704439093, guid: 7cd29285640639146928d3b5e2f8154c, type: 3}
   itemPrefab: {fileID: 0}
@@ -468,8 +468,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 223.7, y: 171}
-  m_SizeDelta: {x: 60.84, y: 61.5363}
+  m_AnchoredPosition: {x: 220.17, y: 171}
+  m_SizeDelta: {x: 54.404, y: 61.5363}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &839808033
 MonoBehaviour:

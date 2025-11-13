@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 
-public class ItemUI : MonoBehaviour, IPointerClickHandler// IPointerClickHandler: Detecta los clicks del raton
+public class ItemUI : MonoBehaviour, IPointerClickHandler // IPointerClickHandler: Detecta los clicks del raton
 {
     [SerializeField] // Hace que aunque la referencia sea privada, se pueda asignar desde el inspector
     private Database bd; // Referencia privada a la base de datos de los coleccionables
